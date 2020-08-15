@@ -13,10 +13,24 @@ class stickynote{
 
     show(){
         stroke(1);
-        strokeWeight(4);
-        beginShape();
+        strokeWeight(3);
+        if (this.drag) {
+            fill(50);
+          } else if (this.hover) {
+            fill(100);
+          } else {
+            fill(175, 200);
+          }
         rect(this.xpos,this.ypos,this.w,this.h);
-        endShape();
+        
+    }
+    hovering(){
+        if (mouseX > this.xpos && mouseX < this.xpos + this.w && mouseY > this.ypos && mouseY < this.ypos + this.h) {
+            this.hover = true;
+          }
+          else {
+              this.hover = false;
+          }
     }
 
     clicked(){

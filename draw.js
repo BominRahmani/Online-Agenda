@@ -10,6 +10,7 @@ function setup(){
 
 function draw(){
     background(0);
+    note.hovering();
     note.clickMoved();
     note.show();
 }
@@ -24,14 +25,15 @@ function mousePressed(){
     note = new stickynote();
     note.xpos = mouseX;
     note.ypos = mouseY;
-    //note.clicked();
     noteList.push(note);
 }
 
 function mouseReleased(){
-    if(note.drag == true){
-        note.drag = false;
-        return;
+    for(let i = 0; i < noteList.length; ++i){
+        if(noteList[i].clicked()){
+            noteList[i].clickStopped();
+            return;
+        }
     }
     note.w = mouseX - note.xpos;
     note.h = mouseY - note.ypos;
