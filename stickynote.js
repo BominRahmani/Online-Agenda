@@ -22,9 +22,23 @@ class stickynote{
     clicked(){
         if (mouseX > this.xpos && mouseX < this.xpos + this.w && mouseY > this.ypos && mouseY < this.ypos + this.h) {
       this.drag = true;
-      this.xOff = this.x - mouseX;
-      this.yOff = this.y - mouseY;
+      this.xOff = this.xpos - mouseX;
+      this.yOff = this.ypos - mouseY;
       console.log("clicked");
+      return true;
     }
+    return false;
+}
+    clickMoved(){
+        if(this.drag == true){
+            this.xpos = this.xOff + mouseX;
+            this.ypos = this.yOff + mouseY;
+        }
     }
+
+    clickStopped(){
+        this.drag = false;
+    }
+
+    
 }
