@@ -1,46 +1,34 @@
-var mouseIsDown=false;
-var startX;
-var startY;
-let notes = [];
+let noteList = [];
+let note;
 
 function setup(){
-    createCanvas(1000,1000);
+    createCanvas(500,500);
+    //note = new stickynote(100,100,50,50);
+    note = new stickynote();
     background(0);
-    notes = new NoteList();
 }
-function draw() {
- 
+
+function draw(){
+    //background(0);
+    note.show();
 }
 
 function mousePressed(){
-    mouseIsDown = true;
-    startX  = mouseX;
-    startY = mouseY;
-    cursor('grab');
-    notes.drag();
-
+    //check if sticky note has been selected
+    note = new stickynote();
+    for(let i = 0; i < noteList.length; ++i){
+        noteList[i].clicked();
+    }
+    note.xpos = mouseX;
+    note.ypos = mouseY;
+    //note.clicked();
+    noteList.push(note);
 }
+
 function mouseReleased(){
-    mouseIsDown = false;
-    notes.show();
-    cursor('default');
+    note.w = mouseX - note.xpos;
+    note.h = mouseY - note.ypos;
+    //note.show();
 }
-class NoteList{
-    constructor(ix,iy){
-        this.ix = ix;
-        this.iy = iy;
-    }    
-    //drag function
-    drag(){
-        this.ix = mouseX;
-        this.iy = mouseY;
-    }
-    show(){
-        stroke(255);
-        strokeWeight(2);
-        beginShape;
-        rect(this.ix,this.iy,(mouseX-this.ix),(mouseY - this.iy));
-        endShape;
 
-    }
-}
+
